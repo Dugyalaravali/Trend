@@ -73,4 +73,6 @@ Application URL: http:// a610e1bda9d3449028a281141a72955a-928990213.ap-south-1.e
 
 DockerHub Repo: https://hub.docker.com/repository/docker/dugyalaravali28/trend-app
 
+monitoring URL :http://a848e2cc8ad624b6cb9323398c5ff2ae-1980784692.ap-south-2.elb.amazonaws.com
+
 Jenkins Pipeline Screenshots: (Check /screenshots folder)
