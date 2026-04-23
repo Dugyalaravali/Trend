@@ -69,7 +69,8 @@ Prometheus: Scrapes metrics from EKS nodes and pods.
 Grafana: Visualizes CPU, Memory usage, and Network traffic.
 
 🔗 Project Deliverables
-Application URL: http:// a610e1bda9d3449028a281141a72955a-928990213.ap-south-1.elb.amazonaws.com :3000
+
+Application URL: http://a610e1bda9d3449028a281141a72955a-928990213.ap-south-1.elb.amazonaws.com:3000
 
 DockerHub Repo: https://hub.docker.com/repository/docker/dugyalaravali28/trend-app
 
