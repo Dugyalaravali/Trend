@@ -16,14 +16,17 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
+                sh 'docker build -t $DOCKER_IMAGE:latest .'
             }
         }
 
-        stage(('Login to DockerHub') {
+        stage('Login to DockerHub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-creds',
-                usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-creds',
+                    usernameVariable: 'USER',
+                    passwordVariable: 'PASS'
+                )]) {
                     sh 'echo $PASS | docker login -u $USER --password-stdin'
                 }
             }
@@ -31,8 +34,7 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                sh 'docker push $IMAGE:latest'
-                }
+                sh 'docker push $DOCKER_IMAGE:latest'
             }
         }
 
@@ -46,14 +48,11 @@ pipeline {
         stage('Setup Monitoring (Prometheus & Grafana)') {
             steps {
                 sh '''
-                # Create namespace if not exists
                 kubectl create namespace $KUBE_NAMESPACE || true
 
-                # Add Helm repo
                 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
                 helm repo update
 
-                # Install monitoring stack
                 helm upgrade --install monitoring prometheus-community/kube-prometheus-stack \
                 --namespace $KUBE_NAMESPACE
                 '''
